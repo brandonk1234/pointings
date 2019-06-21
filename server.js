@@ -9,11 +9,6 @@ const app = express();
 // ------ MONGOOSE GLOBAL PROMISE ------:
 mongoose.promise = global.Promise;
 
-// ------ ROUTES ------:
-app.get('/', (req, res) => {
-    res.send('Hello world');
-});
-
 // ----- INIT MIDDLEWARE -----:
 app.use(cors());
 app.use(bodyParser.json());
@@ -31,6 +26,9 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // ----- MODELS AND ROUTES -----:
+app.get('/', (req, res) => {
+    res.send('Hello world');
+});
 require('./src/app/models/Users');
 require('./src/app/config/passport');
 app.use(require('./src/app/routes'));
